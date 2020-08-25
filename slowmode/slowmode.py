@@ -26,20 +26,20 @@ class SlowMode(commands.Cog):
         seconds = 0
         match = re.findall("([0-9]+[smhd])", time)
         if not match:
-            embed = discord.Embed(description="⚠ I dont understand your time format!",color = 0xff0000)
+            embed = discord.Embed(description="⚠ ¡No he entendido cúanto tiempo es!",color = 0xff0000)
             return await ctx.send(embed=embed)
         for item in match:
             seconds += int(item[:-1]) * units[item[-1]]
         if seconds > 21600:
-            embed = discord.Embed(description="⚠ You can't slowmode a channel for longer than 6 hours!", color=0xff0000)
+            embed = discord.Embed(description="⚠ ¡No puedes poner más de 6 horas en el modo lento!", color=0xff0000)
             return await ctx.send(embed=embed)
         try:
             await channel.edit(slowmode_delay=seconds)
         except discord.errors.Forbidden:
-            embed = discord.Embed(description="⚠ I don't have permission to do this!", color=0xff0000)
+            embed = discord.Embed(description="⚠ ¡No tengo permisos!", color=0xff0000)
             return await ctx.send(embed=embed)
-        embed=discord.Embed(description=f"{ctx.author.mention} set a slowmode delay of `{time}` in {channel.mention}", color=0x06c9ff)
-        embed.set_author(name="Slow Mode")
+        embed=discord.Embed(description=f"{ctx.author.mention} ha configurado el modo lento en `{time}` en {channel.mention}", color=0x06c9ff)
+        embed.set_author(name="Modo lento")
         await ctx.send(embed=embed)
 
     @commands.command()
@@ -50,8 +50,8 @@ class SlowMode(commands.Cog):
             channel = ctx.channel
         seconds_off = 0
         await channel.edit(slowmode_delay=seconds_off)
-        embed=discord.Embed(description=f"{ctx.author.mention} turned off the slowmode in {channel.mention}", color=0x06c9ff)
-        embed.set_author(name="Slow Mode")
+        embed=discord.Embed(description=f"{ctx.author.mention} ha parado el modo lento en {channel.mention}", color=0x06c9ff)
+        embed.set_author(name="Modo lento")
         await ctx.send(embed=embed)
 
 def setup(bot):
